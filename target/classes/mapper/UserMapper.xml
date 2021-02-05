@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.wh.dao.UserMapper">
+
+    <insert id="register" parameterType="ch.wh.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (firstName, lastName, email, password)
+        VALUES (#{firstName}, #{lastName}, #{email}, #{password});
+    </insert>
+
+    <select id="query" resultType="ch.wh.pojo.User">
+        SELECT * FROM user.user WHERE email = #{email};
+    </select>
+
+    <update id="update" parameterType="ch.wh.pojo.User">
+        UPDATE user.user
+        SET password = #{password}
+        WHERE email=#{email}
+    </update>
+</mapper>
+
+<!--
+    <insert id="addBook" parameterType="com.pojo.Books" useGeneratedKeys="true" keyProperty="bookId">
+        INSERT INTO books (bookName, bookCounts, detail) VALUES
+        (#{bookName}, #{bookCounts}, #{detail});
+    </insert>
+
+    <delete id="deleteBookById" parameterType="int">
+        DELETE FROM books WHERE bookId=#{bookId};
+    </delete>
+
+    <update id="updateBook" parameterType="com.pojo.Books">
+        update books
+        set bookName = #{bookName}, bookCounts = #{bookCounts}, detail = #{detail}
+        where bookId = #{bookId};
+    </update>
+
+    <select id="queryBookById" resultType="com.pojo.Books">
+        SELECT * FROM books WHERE bookId = #{bookId};
+    </select>
+
+    <select id="queryAllBooks" resultType="com.pojo.Books">
+        SELECT * FROM books;
+    </select>
+
+
+-->
