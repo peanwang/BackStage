@@ -1,6 +1,7 @@
 package ch.wh.controller;
 
 import ch.wh.pojo.User;
+import ch.wh.service.EmployeeService;
 import ch.wh.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,14 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    private String KEY_USER = "__USER__";
+    private String KEY_USER = "USER";
 
+    private String Employee_KEY = "Employee";
     @Autowired
     UserService userService;
+
+    @Autowired
+    EmployeeService employeeService;
 
     final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -64,6 +69,10 @@ public class UserController {
         try {
             User user = userService.signin(email, password);
             session.setAttribute(KEY_USER, user);
+
+            if(session.getAttribute(Employee_KEY) == null){
+                session.setAttribute(Employee_KEY, employeeService.queryAll());
+            }
         } catch (RuntimeException e) {
             return new ModelAndView("login.html", Map.of("email", email, "error", "Signin failed"));
         }
@@ -88,5 +97,11 @@ public class UserController {
         }
         System.out.println(email + "  " + password);
         return new ModelAndView("redirect:/login");
+    }
+
+    @GetMapping("/logout")
+    public String signout(HttpSession session) {
+        session.removeAttribute(KEY_USER);
+        return "redirect:/login";
     }
 }

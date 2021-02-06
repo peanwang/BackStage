@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.wh.dao.EmployeeMapper">
+
+    <resultMap id="baseMap" type="ch.wh.pojo.Employee">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="Position" property="Position"></result>
+        <result column="Office" property="Office"></result>
+        <result column="Age" property="Age"></result>
+        <result column="StartDate" property="Date" jdbcType="DATE"></result>
+        <result column="Salary" property="Salary"></result>
+    </resultMap>
+
+
+    <select id="getAll" resultMap="baseMap">
+        SELECT * FROM employee;
+    </select>
+
+</mapper>
+
+        <!--
+            <insert id="addBook" parameterType="com.pojo.Books" useGeneratedKeys="true" keyProperty="bookId">
+                INSERT INTO books (bookName, bookCounts, detail) VALUES
+                (#{bookName}, #{bookCounts}, #{detail});
+            </insert>
+
+            <delete id="deleteBookById" parameterType="int">
+                DELETE FROM books WHERE bookId=#{bookId};
+            </delete>
+
+            <update id="updateBook" parameterType="com.pojo.Books">
+                update books
+                set bookName = #{bookName}, bookCounts = #{bookCounts}, detail = #{detail}
+                where bookId = #{bookId};
+            </update>
+
+            <select id="queryBookById" resultType="com.pojo.Books">
+                SELECT * FROM books WHERE bookId = #{bookId};
+            </select>
+
+            <select id="queryAllBooks" resultType="com.pojo.Books">
+                SELECT * FROM books;
+            </select>
+
+
+        -->
